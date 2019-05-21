@@ -13,10 +13,10 @@ An AI build with TensorFlow to recognize a dog's race on an picture.
 - [ ] Improvements of the model
 
 ## Langages, frameworks and libs
-Python 3.7
-TensorFlow GPU
-Numpy
-Pandas
+- Python 3.7
+- TensorFlow GPU
+- Numpy
+- Pandas
 
 ## Install
 pip install tensorflow-gpu, numpy, pandas
