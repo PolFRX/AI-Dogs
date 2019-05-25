@@ -16,12 +16,11 @@ An AI build with TensorFlow to recognize a dog's race on an picture.
 - Python 3.6.8
 - TensorFlow GPU
 - Numpy
-- Pandas
 - Matplotlib
-- Pillow
+- Math
 
 ## Install
-pip install tensorflow-gpu, numpy, pandas, matplotlib, pillow
+pip install tensorflow-gpu, numpy, matplotlib
 
 ## Where it comes from
 Just a little personal project to practice my theorical skills on TensorFlow
