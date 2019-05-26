@@ -1,11 +1,14 @@
 import os
 import numpy as np
 import math
+import tensorflow.keras.models as km
 
 
-def get_files():
+def get_files(categories):
     """ To get all files present in the directory 'dataset'.
 
+    Args:
+        categories: list of categories
     Return:
         labels_training: numpy array which contains labels of training images
         image_path_training: numpy array which contains paths of training images
@@ -26,7 +29,7 @@ def get_files():
         dir_path = path + "\\" + dirs
         for path2, dir, files in os.walk(dir_path):
             for files_name in files:
-                labels.append(dirs)
+                labels.append(categories.index(dirs))
                 image_path.append(dir_path+"\\"+files_name)
 
     labels = np.array(labels)
@@ -45,3 +48,61 @@ def get_files():
     image_path_validation = image_path[length_training_data - len(labels):]
 
     return labels_training, image_path_training, labels_validation, image_path_validation
+
+
+def get_categories():
+    """ To have all categories names.
+
+     Return:
+         categories: a list of all categories
+     """
+    # Take the path to directory "dataset"
+    path = os.getcwd()
+    path = path + "\\dataset"
+    dataset_dirs = os.listdir(path)
+    # Declare the list which will contain categories names
+    categories = list()
+
+    # Browse the "dataset" directory to get all directories names which are the categories
+    for dirs in dataset_dirs:
+        categories.append(dirs)
+
+    return categories
+
+
+def save_model(model, name):
+    """ Save a given model with a particular name.
+
+         Args:
+             model: the model to save
+             name: the name to use to save the model
+         """
+    path = os.getcwd()
+    path = path + "\\models\\" + name + ".model"
+    model.save(path)
+
+
+def load_model(name):
+    """ Load a given model with its name.
+
+     Args:
+         name: the model's name
+     Return:
+         the loaded model
+     """
+    path = os.getcwd()
+    path = path + "\\models\\" + name + ".model"
+    return km.load_model(path)
+
+
+def get_predict_image_path(image_name):
+    """ Get the path of an image we need to predict.
+
+
+     Args:
+        image_name: name of the image to get the path from
+     Return:
+         the path to the image
+         """
+    path = os.getcwd()
+    return path + "\\to_predict\\" + image_name
