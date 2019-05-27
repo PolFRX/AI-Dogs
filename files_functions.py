@@ -47,7 +47,10 @@ def get_files(categories):
     image_path_training = image_path[:length_training_data]
     image_path_validation = image_path[length_training_data - len(labels):]
 
-    return labels_training, image_path_training, labels_validation, image_path_validation
+    number_elements_training = math.floor(len(labels) * 0.9)
+    number_elements_validation = len(labels) - number_elements_training
+
+    return labels_training, image_path_training, labels_validation, image_path_validation, number_elements_training, number_elements_validation
 
 
 def get_categories():
@@ -98,7 +101,6 @@ def load_model(name):
 def get_predict_image_path(image_name):
     """ Get the path of an image we need to predict.
 
-
      Args:
         image_name: name of the image to get the path from
      Return:
@@ -106,3 +108,17 @@ def get_predict_image_path(image_name):
          """
     path = os.getcwd()
     return path + "\\to_predict\\" + image_name
+
+
+def rename_directories_standford():
+    """ Rename all the directories of the standford's dataset to take off ugly parts. """
+
+    path = os.getcwd() + "\\dataset"
+    dataset_dirs = os.listdir(path)
+    for dirs in dataset_dirs:
+        try:
+            dirs_split = dirs.split("-")
+            os.rename(path+"\\"+dirs, path+"\\"+dirs_split[1])
+        except IndexError:
+            continue
+    print("End")
